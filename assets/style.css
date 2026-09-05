@@ -1,0 +1,133 @@
+:root {
+  --ink: #1a1a1a;
+  --muted: #5c5c5c;
+  --rule: #e2e2e0;
+  --bg: #fbfbfa;
+  --card: #ffffff;
+  --accent: #7a2d2d;
+  --maxw: 760px;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --ink: #e8e6e3;
+    --muted: #a3a09b;
+    --rule: #34322e;
+    --bg: #161513;
+    --card: #1e1d1a;
+    --accent: #d99a9a;
+  }
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--ink);
+  font: 16px/1.65 -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+.wrap { max-width: var(--maxw); margin: 0 auto; padding: 0 22px; }
+
+/* ---------- nav ---------- */
+header { border-bottom: 1px solid var(--rule); margin-bottom: 42px; }
+
+nav {
+  max-width: var(--maxw);
+  margin: 0 auto;
+  padding: 20px 22px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 22px;
+  align-items: baseline;
+}
+
+nav .me { font-weight: 600; margin-right: auto; letter-spacing: -0.01em; }
+
+nav a { color: var(--muted); text-decoration: none; }
+nav a:hover { color: var(--ink); }
+nav a.on { color: var(--ink); border-bottom: 2px solid var(--accent); padding-bottom: 2px; }
+
+/* ---------- type ---------- */
+h1 { font-size: 27px; line-height: 1.25; margin: 0 0 6px; letter-spacing: -0.02em; }
+h2 { font-size: 17px; margin: 42px 0 14px; letter-spacing: -0.01em; }
+h3 { font-size: 15px; margin: 26px 0 6px; }
+p { margin: 0 0 15px; }
+a { color: var(--accent); }
+.sub { color: var(--muted); margin: 0 0 26px; }
+.muted { color: var(--muted); }
+.small { font-size: 14px; }
+
+/* ---------- home ---------- */
+.intro { display: flex; gap: 30px; align-items: flex-start; flex-wrap: wrap; }
+.intro .text { flex: 1 1 300px; }
+
+.photo {
+  width: 168px; height: 210px; object-fit: cover;
+  border-radius: 3px; border: 1px solid var(--rule); background: var(--card);
+}
+
+.links { list-style: none; padding: 0; margin: 20px 0 0; }
+.links li { margin-bottom: 5px; }
+
+/* ---------- papers ---------- */
+.paper { border-top: 1px solid var(--rule); padding: 20px 0; }
+.paper:last-child { border-bottom: 1px solid var(--rule); }
+.paper .t { font-weight: 600; display: block; margin-bottom: 3px; }
+.paper .a { color: var(--muted); font-size: 14px; margin-bottom: 8px; }
+
+.tag {
+  display: inline-block; font-size: 11px; letter-spacing: 0.07em;
+  text-transform: uppercase; color: var(--accent);
+  border: 1px solid var(--accent); border-radius: 3px;
+  padding: 1px 6px; margin-left: 6px; vertical-align: 1px;
+}
+
+/* ---------- demo ---------- */
+.card {
+  background: var(--card); border: 1px solid var(--rule);
+  border-radius: 6px; padding: 24px; margin: 22px 0;
+}
+
+.urn { display: flex; gap: 7px; flex-wrap: wrap; margin: 14px 0 4px; }
+
+.ball {
+  width: 27px; height: 27px; border-radius: 50%;
+  border: 1px solid rgba(0, 0, 0, 0.22);
+}
+
+.ball.g { background: #4f9d5d; }
+.ball.b { background: #4a72b8; }
+.ball.y { background: #ddb520; }
+.ball.o { background: #d97a30; }
+
+.choices { display: flex; gap: 12px; margin-top: 20px; flex-wrap: wrap; }
+
+button {
+  font: inherit; cursor: pointer; padding: 13px 20px;
+  border: 1px solid var(--rule); border-radius: 5px;
+  background: var(--card); color: var(--ink); flex: 1 1 220px;
+  text-align: left; line-height: 1.4;
+}
+
+button:hover { border-color: var(--accent); }
+button.plain { flex: 0 0 auto; text-align: center; padding: 9px 16px; }
+
+.bar { height: 3px; background: var(--rule); border-radius: 2px; margin: 4px 0 22px; }
+.bar > div { height: 100%; background: var(--accent); border-radius: 2px; transition: width .25s; }
+
+table { border-collapse: collapse; width: 100%; font-size: 14px; }
+th, td { text-align: right; padding: 7px 9px; border-bottom: 1px solid var(--rule); }
+th:first-child, td:first-child { text-align: left; }
+th { font-weight: 600; color: var(--muted); font-size: 12px; text-transform: uppercase;
+     letter-spacing: 0.05em; }
+tr.asked td { color: var(--muted); }
+
+.scroll { overflow-x: auto; }
+
+footer {
+  border-top: 1px solid var(--rule); margin-top: 60px;
+  padding: 20px 0 46px; color: var(--muted); font-size: 13px;
+}

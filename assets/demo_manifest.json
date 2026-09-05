@@ -1,0 +1,184 @@
+{
+ "depth": 10,
+ "n_paths": 1024,
+ "families": [
+  "neoadd",
+  "prelec",
+  "ge",
+  "heu",
+  "heu_b",
+  "smooth"
+ ],
+ "families_shown": [
+  "neoadd",
+  "prelec",
+  "heu_b",
+  "smooth"
+ ],
+ "labels": {
+  "neoadd": "Neo-additive",
+  "prelec": "Prelec",
+  "ge": "Goldstein-Einhorn",
+  "heu": "Hurwicz EU",
+  "heu_b": "Hurwicz EU (bridged)",
+  "smooth": "Smooth (Bayesian)"
+ },
+ "belief": {
+  "neoadd": "carnap: free c",
+  "prelec": "carnap: free c",
+  "ge": "carnap: free c",
+  "heu": "carnap: free c",
+  "heu_b": "carnap: free c",
+  "smooth": "bayes: alpha = 1 + counts"
+ },
+ "events": [
+  "g",
+  "b",
+  "y",
+  "o",
+  "byo",
+  "gyo",
+  "gbo",
+  "gby",
+  "gb",
+  "gy",
+  "go",
+  "by",
+  "bo",
+  "yo"
+ ],
+ "n_asked_events": 8,
+ "held_out_events": [
+  "gb",
+  "gy",
+  "go",
+  "by",
+  "bo",
+  "yo"
+ ],
+ "event_names": {
+  "g": "green",
+  "b": "blue",
+  "y": "yellow",
+  "o": "orange",
+  "byo": "blue, yellow, or orange",
+  "gyo": "green, yellow, or orange",
+  "gbo": "green, blue, or orange",
+  "gby": "green, blue, or yellow",
+  "gb": "green or blue",
+  "gy": "green or yellow",
+  "go": "green or orange",
+  "by": "blue or yellow",
+  "bo": "blue or orange",
+  "yo": "yellow or orange"
+ },
+ "colors": [
+  "g",
+  "b",
+  "y",
+  "o"
+ ],
+ "color_names": {
+  "g": "green",
+  "b": "blue",
+  "y": "yellow",
+  "o": "orange"
+ },
+ "composition_multiset": [
+  10,
+  20,
+  30,
+  40
+ ],
+ "draw_patterns": [
+  [
+   5,
+   0,
+   0,
+   0
+  ],
+  [
+   4,
+   1,
+   0,
+   0
+  ],
+  [
+   3,
+   2,
+   0,
+   0
+  ],
+  [
+   3,
+   1,
+   1,
+   0
+  ],
+  [
+   2,
+   2,
+   1,
+   0
+  ],
+  [
+   2,
+   1,
+   1,
+   1
+  ]
+ ],
+ "n_draws": 5,
+ "n_probes": 101,
+ "scale": 1.5259021896696422e-05,
+ "p_curve": [
+  0.01,
+  0.0345,
+  0.059,
+  0.0835,
+  0.108,
+  0.1325,
+  0.157,
+  0.1815,
+  0.206,
+  0.2305,
+  0.255,
+  0.2795,
+  0.304,
+  0.3285,
+  0.353,
+  0.3775,
+  0.402,
+  0.4265,
+  0.451,
+  0.4755,
+  0.5,
+  0.5245,
+  0.549,
+  0.5735,
+  0.598,
+  0.6225,
+  0.647,
+  0.6715,
+  0.696,
+  0.7205,
+  0.745,
+  0.7695,
+  0.794,
+  0.8185,
+  0.843,
+  0.8675,
+  0.892,
+  0.9165,
+  0.941,
+  0.9655,
+  0.99
+ ],
+ "shape": [
+  6,
+  1024,
+  6,
+  14
+ ],
+ "guiding_family": "neoadd"
+}

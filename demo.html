@@ -1,0 +1,127 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Demo &middot; Sijia Zhang</title>
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+
+<header>
+  <nav>
+    <span class="me">Sijia Zhang</span>
+    <a href="index.html">About</a>
+    <a href="research.html">Research</a>
+    <a href="teaching.html">Teaching</a>
+    <a href="demo.html" class="on">Demo</a>
+    <a href="assets/CV.pdf">CV</a>
+  </nav>
+</header>
+
+<main class="wrap">
+
+  <h1>What do the models think of you?</h1>
+  <p class="sub">Answer a few bets. Then four theories of ambiguity predict a kind of bet you
+  were never asked about.</p>
+
+  <!-- ------------------------------------------------ intro -->
+  <section id="intro">
+    <div class="card">
+      <p>There is a box of 100 balls, each green, blue, yellow or orange. You are not told how many
+      of each. Five balls were drawn, with replacement, and here is what came out:</p>
+      <div class="urn" id="urn"></div>
+      <p class="small muted">Your box and your draws are sampled fresh. Reload for a different one.</p>
+    </div>
+
+    <p>Now you will be offered a series of bets. Each time, you choose between betting on a colour
+    from that box &mdash; where you do not know the odds &mdash; and a bet that pays with a stated
+    chance, like a coin or a spinner.</p>
+
+    <p>There are no right answers, and the questions are not fixed in advance. Each one is chosen by an
+    adaptive procedure that picks whichever question it expects to learn the most from, given
+    everything you have said so far. That is the method the research uses; this is a short version
+    of it.</p>
+
+    <div class="choices">
+      <button id="start" class="plain" disabled>Loading&hellip;</button>
+    </div>
+  </section>
+
+  <!-- ------------------------------------------------ play -->
+  <section id="play" hidden>
+    <p class="small muted" id="qnum"></p>
+    <div class="bar"><div id="qbar" style="width:0%"></div></div>
+    <div class="card">
+      <p id="qtext"></p>
+      <div class="choices">
+        <button id="optA"></button>
+        <button id="optB"></button>
+      </div>
+    </div>
+    <p class="small muted">Answer with your gut. The procedure adapts either way.</p>
+  </section>
+
+  <!-- ------------------------------------------------ results -->
+  <section id="results" hidden>
+    <h2>Bets you were never offered</h2>
+    <p>Each column is a different theory of how people bet when they do not know the odds, fitted
+    to your answers. The numbers are matching probabilities: the known chance at which that model
+    says you would be indifferent.</p>
+
+    <div class="card scroll">
+      <table>
+        <thead id="thead_out"></thead>
+        <tbody id="tbody_out"></tbody>
+      </table>
+    </div>
+
+    <p id="heldnote"></p>
+
+    <h2>And the ones you were</h2>
+    <p class="small muted">For comparison. You gave binary answers at a handful of offers; these
+    are the continuous matching probabilities each model reads off them.</p>
+
+    <div class="card scroll">
+      <table>
+        <thead id="thead_in"></thead>
+        <tbody id="tbody_in"></tbody>
+      </table>
+    </div>
+
+    <h2>The same thing as a curve</h2>
+    <p>Read it as: for an event of any given probability, what known chance would make you
+    indifferent? The dashed line is what someone indifferent to ambiguity would do. Distance from
+    it is your fitted ambiguity attitude.</p>
+    <div class="card" id="plot"></div>
+
+    <h2>And here is the open question</h2>
+    <p>Those models mostly agree with each other, because you gave them one box, and any of them
+    can be bent to fit one box. They stop agreeing when you change the box &mdash; when the odds
+    get sharper or vaguer than the ones you were measured on. Some of these models carry your
+    attitude across that change; at least one of them cannot see the change at all.</p>
+    <p>Which of them travels is an empirical question, and it is what my job market paper is
+    about. <a href="research.html">Read about it here.</a></p>
+
+    <div class="choices">
+      <button id="again" class="plain">Play again</button>
+    </div>
+
+    <p class="small muted" style="margin-top:26px">Method. Questions are chosen by maximising
+    expected information gain under a neo-additive model with a free belief; the models are then
+    re-fitted to the same answers on a finer grid, with belief restricted to a one-parameter
+    update (Aydogan 2021) except for the smooth model, which assumes Bayesian updating. The
+    single- and triple-colour bets are what the procedure may ask; the two-colour bets are held
+    out by construction, exactly as in the experiment this is drawn from. Nothing is stored and
+    nothing is sent anywhere &mdash; it all runs in your browser.</p>
+  </section>
+
+</main>
+
+<footer class="wrap">
+  <a href="index.html">Sijia Zhang</a> &middot; teresasijia@tamu.edu
+</footer>
+
+<script src="assets/demo.js"></script>
+</body>
+</html>

@@ -5,7 +5,7 @@ Static site, no build step. Served by GitHub Pages from the `main` branch.
 ```
 index.html        about
 research.html     papers
-teaching.html     teaching
+cv.html           CV, with the PDF embedded
 demo.html         interactive elicitation demo
 assets/           stylesheet, demo script, precomputed demo tables
 ```

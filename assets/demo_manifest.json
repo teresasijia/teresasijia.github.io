@@ -12,6 +12,8 @@
  "families_shown": [
   "neoadd",
   "prelec",
+  "ge",
+  "heu",
   "heu_b",
   "smooth"
  ],
@@ -19,9 +21,9 @@
   "neoadd": "Neo-additive",
   "prelec": "Prelec",
   "ge": "Goldstein-Einhorn",
-  "heu": "Hurwicz EU",
+  "heu": "Hurwicz EU (constant)",
   "heu_b": "Hurwicz EU (bridged)",
-  "smooth": "Smooth (Bayesian)"
+  "smooth": "Smooth"
  },
  "belief": {
   "neoadd": "carnap: free c",
@@ -32,45 +34,43 @@
   "smooth": "bayes: alpha = 1 + counts"
  },
  "events": [
-  "g",
-  "b",
-  "y",
-  "o",
+  "gb",
+  "gy",
+  "go",
+  "by",
+  "bo",
+  "yo",
   "byo",
   "gyo",
   "gbo",
   "gby",
-  "gb",
-  "gy",
-  "go",
-  "by",
-  "bo",
-  "yo"
+  "g",
+  "b",
+  "y",
+  "o"
  ],
- "n_asked_events": 8,
+ "n_asked_events": 10,
  "held_out_events": [
-  "gb",
-  "gy",
-  "go",
-  "by",
-  "bo",
-  "yo"
+  "g",
+  "b",
+  "y",
+  "o"
  ],
  "event_names": {
-  "g": "green",
-  "b": "blue",
-  "y": "yellow",
-  "o": "orange",
-  "byo": "blue, yellow, or orange",
-  "gyo": "green, yellow, or orange",
-  "gbo": "green, blue, or orange",
-  "gby": "green, blue, or yellow",
   "gb": "green or blue",
   "gy": "green or yellow",
   "go": "green or orange",
   "by": "blue or yellow",
   "bo": "blue or orange",
-  "yo": "yellow or orange"
+  "yo": "yellow or orange",
+  "byo": "blue, yellow, or orange",
+  "gyo": "green, yellow, or orange",
+  "gbo": "green, blue, or orange",
+  "gby": "green, blue, or yellow",
+  "g": "green",
+  "b": "blue",
+  "y": "yellow",
+  "o": "orange"
  },
  "colors": [
   "g",

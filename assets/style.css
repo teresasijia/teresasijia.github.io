@@ -1,22 +1,12 @@
+/* Soft cards — rounded, roomy, light grey ground with white cards. */
 :root {
-  --ink: #1a1a1a;
-  --muted: #5c5c5c;
-  --rule: #e2e2e0;
-  --bg: #fbfbfa;
+  --bg: #f6f7fa;
   --card: #ffffff;
-  --accent: #7a2d2d;
-  --maxw: 760px;
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --ink: #e8e6e3;
-    --muted: #a3a09b;
-    --rule: #34322e;
-    --bg: #161513;
-    --card: #1e1d1a;
-    --accent: #d99a9a;
-  }
+  --ink: #1f2430;
+  --muted: #6f7787;
+  --rule: #e6e9f0;
+  --accent: #3c5a99;
+  --maxw: 960px;
 }
 
 * { box-sizing: border-box; }
@@ -25,77 +15,206 @@ body {
   margin: 0;
   background: var(--bg);
   color: var(--ink);
-  font: 16px/1.65 -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+  font: 1.0625rem/1.7 -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
+
+  /* the footer sits at the bottom of the window even when the page is short */
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
 }
 
-.wrap { max-width: var(--maxw); margin: 0 auto; padding: 0 22px; }
+/* width: 100% is load-bearing -- an auto cross-axis margin turns off the
+   flex stretch, so without it main shrink-to-fits its content. */
+body > main { flex: 1 0 auto; width: 100%; }
+
+.wrap { max-width: var(--maxw); margin: 0 auto; padding: 0 24px; }
 
 /* ---------- nav ---------- */
-header { border-bottom: 1px solid var(--rule); margin-bottom: 42px; }
+header { background: var(--bg); }
 
 nav {
   max-width: var(--maxw);
   margin: 0 auto;
-  padding: 20px 22px;
+  padding: 17px 24px 6px;       /* two thirds of the original 26; body margin is 0, so this
+                                   padding is the entire gap above the tab row */
   display: flex;
+  gap: 20px;
+  align-items: center;
   flex-wrap: wrap;
-  gap: 22px;
-  align-items: baseline;
 }
 
-nav .me { font-weight: 600; margin-right: auto; letter-spacing: -0.01em; }
+nav .me {
+  font-weight: 700;
+  font-size: 1.16rem;
+  margin-right: auto;
+  display: inline-flex;
+  align-items: center;
+  color: var(--ink);
+  text-decoration: none;
+  letter-spacing: -0.01em;
+}
 
-nav a { color: var(--muted); text-decoration: none; }
-nav a:hover { color: var(--ink); }
-nav a.on { color: var(--ink); border-bottom: 2px solid var(--accent); padding-bottom: 2px; }
+nav .bat { height: 24px; width: auto; margin-right: 10px; fill: currentColor; }
+
+nav a.tab { color: var(--muted); text-decoration: none; font-size: 1.14rem; }
+nav a.tab:hover { color: var(--ink); }
+nav a.tab.on { color: var(--ink); font-weight: 600; }
 
 /* ---------- type ---------- */
-h1 { font-size: 27px; line-height: 1.25; margin: 0 0 6px; letter-spacing: -0.02em; }
-h2 { font-size: 17px; margin: 42px 0 14px; letter-spacing: -0.01em; }
-h3 { font-size: 15px; margin: 26px 0 6px; }
-p { margin: 0 0 15px; }
+h1 { font-size: 1.75rem; line-height: 1.25; margin: 0 0 8px; letter-spacing: -0.02em; }
+main.wrap > h1:first-child { margin-top: 1.9rem; }
+/* research.html drops its "Research" h1 -- the nav tab and the page title already say it --
+   so its first h2 has to take over the job of setting the top of the page. Without this the
+   h2's own 2.6rem would collapse through main and move the whole block down instead. */
+main.wrap > h2:first-child { margin-top: 1.9rem; }
+
+/* home: the name line sits at body size so the intro reads as one block */
+.hero h1 { font-size: 1.1875rem; letter-spacing: 0; margin-bottom: 0.35rem; }
+.hero p { font-size: 1.125rem; }
+h2 { font-size: 1.375rem; margin: 2.6rem 0 1rem; letter-spacing: -0.01em; }
+p { margin: 0 0 1rem; }
 a { color: var(--accent); }
-.sub { color: var(--muted); margin: 0 0 26px; }
+.tagline { color: var(--muted); margin-bottom: 1.3rem; }
 .muted { color: var(--muted); }
-.small { font-size: 14px; }
+.small { font-size: 0.875rem; }
 
-/* ---------- home ---------- */
-.intro { display: flex; gap: 30px; align-items: flex-start; flex-wrap: wrap; }
-.intro .text { flex: 1 1 300px; }
+/* ---------- home hero ---------- */
+.hero { display: flex; gap: 144px; align-items: flex-start; flex-wrap: wrap; padding-top: 80px; }
+.hero .txt { flex: 1 1 320px; }
 
-.photo {
-  width: 168px; height: 210px; object-fit: cover;
-  border-radius: 3px; border: 1px solid var(--rule); background: var(--card);
+.hero .side { flex: 0 0 190px; }
+
+/* The photo stays centred under the whole nav lockup, bat and name together, not under the name
+   alone. The two offsets are NOT equal, because the lockup is not as wide as the photo: measured
+   in the browser it renders 160.8px (bat 55.4 + 10 gap + "Sijia Zhang" 95.5) against the photo's
+   190. Centring is therefore -72 + (190 - 160.8)/2 = -57.4, rounded to -57, which puts the lockup
+   centre at 207.4 against the photo's 207. Re-measure this if the name's font-size or the bat's
+   height changes: enlarging both in this session is what pulled the old -48 off by 9.4px.
+
+   Why the threshold is 1056 and not 760. The photo now sits 72px outside the 960px wrap, and at
+   viewport W the wrap's content starts at (W - 960)/2 + 24. Needing that to be at least 72 gives
+   W >= 1056; below it the offset is dropped and the hero falls back to the stacked layout, which
+   is the only thing keeping the photo on screen. The old -24px cleared at 960, which is why the
+   760 guard never actually bound. */
+@media (min-width: 1056px) {
+  .hero .side { margin-left: -72px; }
+  nav .me { margin-left: -57px; }
 }
 
-.links { list-style: none; padding: 0; margin: 20px 0 0; }
+.hero .side img {
+  display: block;
+  width: 190px; height: auto;          /* the source is 4:5, so show all of it rather than crop */
+  border-radius: 20px; border: 1px solid var(--rule);
+}
+
+.links { list-style: none; padding: 0; margin: 1.2rem 0 0; }
 .links li { margin-bottom: 5px; }
 
-/* ---------- papers ---------- */
-.paper { border-top: 1px solid var(--rule); padding: 20px 0; }
-.paper:last-child { border-bottom: 1px solid var(--rule); }
-.paper .t { font-weight: 600; display: block; margin-bottom: 3px; }
-.paper .a { color: var(--muted); font-size: 14px; margin-bottom: 8px; }
+.hero .side .links { margin-top: 0.95rem; font-size: 0.92rem; }
 
-.tag {
-  display: inline-block; font-size: 11px; letter-spacing: 0.07em;
-  text-transform: uppercase; color: var(--accent);
-  border: 1px solid var(--accent); border-radius: 3px;
-  padding: 1px 6px; margin-left: 6px; vertical-align: 1px;
+/* ---------- home: demo call-out ---------- */
+.try {
+  display: block;
+  background: var(--card);
+  border: 1px solid var(--rule);
+  border-left: 3px solid var(--accent);
+  border-radius: 12px;
+  padding: 0.95rem 1.15rem;
+  margin: 1.5rem 0;
+  text-decoration: none;
+  color: var(--ink);
+  box-shadow: 0 1px 3px rgba(20, 25, 35, 0.07);
+}
+
+.try:hover { border-color: var(--accent); }
+.try-t { display: block; color: var(--accent); font-weight: 650; font-size: 1.16rem; }
+/* was 0.9rem in --muted, which measures 4.5:1 on white -- the accessibility floor exactly, and it
+   read as thin. Full ink instead. It now sits at body size rather than below it, so the hierarchy
+   here rests on the accent colour and weight of the heading above, not on a size step. */
+.try-d { display: block; margin-top: 5px; font-size: 1.125rem; color: var(--ink); line-height: 1.6; }
+
+/* ---------- paper cards ---------- */
+.paper {
+  background: var(--card);
+  border: 1px solid var(--rule);
+  border-radius: 12px;
+  padding: 1.15rem 1.35rem;
+  margin-bottom: 0.85rem;
+}
+
+.paper .t { font-weight: 650; line-height: 1.4; font-size: 1.25rem; }
+.paper .meta { color: var(--muted); font-size: 0.97rem; margin: 5px 0 0; }
+
+.badge {
+  display: inline-block;
+  font-size: 0.75rem; letter-spacing: 0.07em; text-transform: uppercase;
+  border: 1px solid var(--accent); color: var(--accent);
+  border-radius: 4px; padding: 1px 7px;
+  margin-left: 6px; vertical-align: 2px; white-space: nowrap;
+}
+
+.badge.grey { border-color: var(--rule); color: var(--muted); }
+
+/* revise-and-resubmit: filled badge, accent rail, same weight as the JMP card */
+.badge.rr {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: #fff;
+  font-weight: 600;
+  /* .badge sets white-space: nowrap, which is right for a two-word status but not for a badge
+     carrying a journal name: at 437px this one could not wrap and pushed research.html to a
+     490px scroll width on a 390px phone. Only this variant is long enough to need it. */
+  white-space: normal;
+}
+
+
+/* ---------- collapsible abstracts ---------- */
+details { margin-top: 0.7rem; }
+
+details summary {
+  cursor: pointer; color: var(--accent); font-size: 1rem;
+  list-style: none; display: inline-flex; align-items: center; gap: 5px;
+}
+
+details summary::-webkit-details-marker { display: none; }
+details summary::before { content: "\25B8"; font-size: 0.72em; }
+details[open] summary::before { content: "\25BE"; }
+
+details .abs {
+  margin-top: 0.65rem;
+  font-size: 1.0625rem;
+  line-height: 1.65;
+  color: var(--ink);
+}
+
+/* ---------- CV page ---------- */
+.pdf {
+  display: block;
+  width: 100%;
+  /* letter ratio, so the page fills the column instead of being fitted to a
+     short box and letterboxed down to half the width */
+  aspect-ratio: 8.5 / 11;
+  min-height: 620px;
+  border: 1px solid var(--rule);
+  border-radius: 12px;
+  background: var(--card);
 }
 
 /* ---------- demo ---------- */
 .card {
-  background: var(--card); border: 1px solid var(--rule);
-  border-radius: 6px; padding: 24px; margin: 22px 0;
+  background: var(--card);
+  border: 1px solid var(--rule);
+  border-radius: 12px;
+  padding: 1.4rem 1.5rem;
+  margin: 1.4rem 0;
 }
 
-.urn { display: flex; gap: 7px; flex-wrap: wrap; margin: 14px 0 4px; }
+.urn { display: flex; gap: 8px; flex-wrap: wrap; margin: 0.9rem 0 0.3rem; }
 
 .ball {
-  width: 27px; height: 27px; border-radius: 50%;
-  border: 1px solid rgba(0, 0, 0, 0.22);
+  width: 28px; height: 28px; border-radius: 50%;
+  border: 1px solid rgba(0, 0, 0, 0.18);
 }
 
 .ball.g { background: #4f9d5d; }
@@ -103,31 +222,66 @@ a { color: var(--accent); }
 .ball.y { background: #ddb520; }
 .ball.o { background: #d97a30; }
 
-.choices { display: flex; gap: 12px; margin-top: 20px; flex-wrap: wrap; }
+.choices { display: flex; gap: 12px; margin-top: 1.2rem; flex-wrap: wrap; }
 
 button {
-  font: inherit; cursor: pointer; padding: 13px 20px;
-  border: 1px solid var(--rule); border-radius: 5px;
-  background: var(--card); color: var(--ink); flex: 1 1 220px;
-  text-align: left; line-height: 1.4;
+  font: inherit; cursor: pointer;
+  padding: 0.85rem 1.15rem;
+  border: 1px solid var(--rule); border-radius: 10px;
+  background: var(--card); color: var(--ink);
+  flex: 1 1 230px; text-align: left; line-height: 1.45;
+  box-shadow: 0 1px 3px rgba(20, 25, 35, 0.05);
 }
 
-button:hover { border-color: var(--accent); }
-button.plain { flex: 0 0 auto; text-align: center; padding: 9px 16px; }
+button:hover:not(:disabled) { border-color: var(--accent); }
+button:disabled { cursor: default; color: var(--muted); box-shadow: none; }
+button.plain { flex: 0 0 auto; text-align: center; padding: 0.6rem 1.1rem; font-weight: 600; }
 
-.bar { height: 3px; background: var(--rule); border-radius: 2px; margin: 4px 0 22px; }
-.bar > div { height: 100%; background: var(--accent); border-radius: 2px; transition: width .25s; }
+.bar { height: 4px; background: var(--rule); border-radius: 3px; margin: 0.3rem 0 1.3rem; }
+.bar > div { height: 100%; background: var(--accent); border-radius: 3px; transition: width .25s; }
 
-table { border-collapse: collapse; width: 100%; font-size: 14px; }
-th, td { text-align: right; padding: 7px 9px; border-bottom: 1px solid var(--rule); }
+table { border-collapse: collapse; width: 100%; font-size: 0.9rem; }
+th, td { text-align: right; padding: 0.5rem 0.6rem; border-bottom: 1px solid var(--rule); }
 th:first-child, td:first-child { text-align: left; }
-th { font-weight: 600; color: var(--muted); font-size: 12px; text-transform: uppercase;
-     letter-spacing: 0.05em; }
+th { font-weight: 600; color: var(--muted); font-size: 0.72rem;
+     text-transform: uppercase; letter-spacing: 0.06em; }
+tr:last-child td { border-bottom: none; }
 tr.asked td { color: var(--muted); }
 
 .scroll { overflow-x: auto; }
 
-footer {
-  border-top: 1px solid var(--rule); margin-top: 60px;
-  padding: 20px 0 46px; color: var(--muted); font-size: 13px;
+/* ---------- demo: instruction steps, model switcher ---------- */
+.steps { margin: 0; padding-left: 1.25rem; }
+.steps li { margin-bottom: 0.85rem; }
+.steps li:last-child { margin-bottom: 0; }
+
+.ball.tiny { width: 14px; height: 14px; display: inline-block; vertical-align: -2px;
+             margin-right: 3px; }
+
+.models { display: flex; gap: 9px; align-items: center; flex-wrap: wrap; margin: 1.2rem 0 0.4rem; }
+
+button.model {
+  flex: 0 0 auto; text-align: center;
+  padding: 0.42rem 0.85rem; font-size: 0.92rem;
+  border-radius: 999px; box-shadow: none;
+  color: var(--muted);
 }
+
+button.model.on {
+  background: var(--accent); border-color: var(--accent); color: #fff; font-weight: 600;
+}
+
+/* ---------- footer ---------- */
+/* a direct child of body, so it carries the page width itself */
+footer {
+  width: 100%;
+  max-width: var(--maxw);
+  border-top: 1px solid var(--rule);
+  margin: 3.5rem auto 0;
+  padding: 1.3rem 24px 3rem;
+  color: var(--muted);
+  font-size: 0.8rem;
+  display: flex; gap: 16px; flex-wrap: wrap;
+}
+
+footer .credit { margin-left: auto; }

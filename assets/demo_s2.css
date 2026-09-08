@@ -1,0 +1,464 @@
+/* demo_s2.css -- the experiment area, copied from Study 2's own templates
+   (setup/ExampleDraws.html and main_dose/Question.html) so the demo looks like
+   the thing it is a demo of. The palette is Study 2's own, down to the pale
+   yellow on the winning-color chips and the blue-grey fill on a selected
+   option box. Everything is scoped under .s2, so the site's own stylesheet
+   keeps the nav and footer in the site green. */
+
+.s2 {
+  --ink:        #111111;
+  --ink-soft:   #555555;
+  --hairline:   #d8d4cc;
+  --accent:     #33425a;
+  --accent-deep:#1f2c42;
+  --accent-soft:#eef2f8;
+  --cream:      #fbf6e8;
+  --cream-border: #e7dfcd;
+  --surface:    #fafaf7;
+  --s2green:    #009E73;
+  --s2blue:     #0072B2;
+  --s2yellow:   #F0E442;
+  --s2orange:   #D55E00;
+
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  color: var(--ink);
+  font-size: 16px;
+  line-height: 1.6;
+  max-width: 1144px;
+  margin: 0 auto;
+  padding: 26px 24px 40px;
+  -webkit-font-smoothing: antialiased;
+}
+
+.s2 .page-container {
+  border-radius: 12px;
+  max-width: 880px;
+  margin: 0 auto;
+  padding: 0 28px 32px;
+  background: var(--card);
+  border: 1px solid var(--hairline);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.04);
+}
+
+.s2 .page-title {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-weight: 600;
+  font-size: 38px;
+  line-height: 1.18;
+  text-align: center;
+  margin: 22px 0;
+}
+
+.s2 .intro-info { font-size: 16.5px; line-height: 1.75; margin-bottom: 22px; }
+
+/* the instruction page's section labels */
+.s2 .intro-info .intro-label { font-weight: 700; margin: 22px 0 4px; }
+.s2 .intro-info .intro-label:first-child { margin-top: 0; }
+.s2 .intro-info p  { margin: 0 0 14px; }
+.s2 .intro-info ol { margin: 0 0 14px; padding-left: 22px; }
+.s2 .intro-info li { margin-bottom: 12px; }
+
+.s2 .color-green  { color: #009E73; font-weight: 600; }
+.s2 .color-blue   { color: #0072B2; font-weight: 600; }
+.s2 .color-yellow { color: #a07a00; font-weight: 600; }
+.s2 .color-orange { color: #D55E00; font-weight: 600; }
+
+/* ---------- the draw ---------- */
+.s2 .draws-card {
+  background: #ffffff; border: 1px solid var(--hairline);
+  padding: 24px 28px; margin: 0 0 22px;
+}
+
+.s2 .draws-label {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-weight: 500; font-size: 18px; margin-bottom: 14px;
+}
+
+.s2 .draws-balls { display: flex; gap: 10px; flex-wrap: wrap; justify-content: center; }
+
+.s2 .draw-ball {
+  width: 38px; height: 38px; border-radius: 50%; border: 1.5px solid var(--ink);
+  opacity: 0; transform: scale(0.5);
+  transition: opacity 0.25s ease-out, transform 0.25s ease-out;
+}
+
+.s2 .draw-ball.visible { opacity: 1; transform: scale(1); }
+.s2 .draw-ball.g { background: var(--s2green); }
+.s2 .draw-ball.b { background: var(--s2blue); }
+.s2 .draw-ball.y { background: var(--s2yellow); }
+.s2 .draw-ball.o { background: var(--s2orange); }
+
+.s2 .draws-summary {
+  display: none; margin-top: 22px; padding: 16px 22px;
+  background: var(--surface); border: 1px solid var(--hairline);
+}
+
+.s2 .summary-label {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-weight: 500; font-size: 16px; margin-bottom: 10px; text-align: center;
+}
+
+.s2 .summary-row {
+  display: flex; gap: 28px; flex-wrap: wrap; align-items: center;
+  justify-content: center; font-size: 17px; font-weight: 600;
+}
+
+.s2 .summary-item { display: flex; align-items: center; gap: 8px; }
+
+.s2 .summary-ball {
+  width: 26px; height: 26px; border-radius: 50%;
+  border: 1.5px solid var(--ink); flex-shrink: 0;
+}
+
+.s2 .summary-ball.g { background: var(--s2green); }
+.s2 .summary-ball.b { background: var(--s2blue); }
+.s2 .summary-ball.y { background: var(--s2yellow); }
+.s2 .summary-ball.o { background: var(--s2orange); }
+
+.s2 .status-text {
+  text-align: center; margin-top: 16px;
+  font-size: 14px; font-weight: 600; color: var(--accent);
+  text-transform: uppercase; letter-spacing: 0.08em; min-height: 20px;
+}
+
+.s2 .next-row { text-align: center; margin-top: 28px; opacity: 0; transition: opacity 0.5s; }
+.s2 .next-row.visible { opacity: 1; }
+
+.s2 .next-row button,
+.s2 .next-container button {
+  font-family: 'Inter', sans-serif;
+  background: var(--accent); color: #ffffff;
+  border: 1px solid var(--accent); border-radius: 0;
+  padding: 12px 34px; font-size: 15px; font-weight: 600;
+  text-transform: uppercase; letter-spacing: 0.06em;
+  cursor: pointer; box-shadow: none; flex: 0 0 auto; line-height: 1.4;
+}
+
+.s2 .next-row button:hover,
+.s2 .next-container button:hover:not(:disabled) {
+  background: var(--accent-deep); border-color: var(--accent-deep);
+}
+
+.s2 .next-container { text-align: center; margin-top: 13px; }
+
+.s2 .next-container button:disabled {
+  background: var(--hairline); color: var(--ink-soft);
+  border-color: var(--hairline); cursor: not-allowed;
+}
+
+/* ---------- a question ---------- */
+.s2 .section-row { max-width: 1096px; margin: 0 auto 22px; }
+
+.s2 .section-header {
+  font-size: 21.5px; font-weight: 600; text-align: center; margin: 0;
+}
+
+.s2 .section-header strong { font-weight: 700; }
+
+.s2 .layout-2col {
+  display: grid; grid-template-columns: 528px 528px;
+  gap: 0 40px; justify-content: center; margin-bottom: 24px;
+}
+
+.s2 .draws-strip {
+  grid-column: 2; grid-row: 1;
+  background: var(--cream); border: 1px solid var(--cream-border);
+  border-left: 4px solid var(--accent); padding: 9px 12px;
+}
+
+.s2 .draws-strip .draws-text {
+  display: block; font-size: 16.5px; line-height: 1.5; margin: 0 0 7px;
+}
+
+.s2 .has-tip {
+  position: relative; text-decoration: underline dotted var(--ink);
+  text-underline-offset: 3px; cursor: help;
+}
+
+.s2 .has-tip .tip {
+  position: absolute; top: calc(100% + 8px); left: 50%; transform: translateX(-50%);
+  background: var(--ink); color: white;
+  /* a definition is a sentence, not a label: bigger, looser, ranged left and in
+     a wider column, because centred 13px text in a 250px box is unreadable once
+     it runs past two lines. The face is set explicitly because one of the two
+     tips hangs off a Playfair heading and would otherwise come out serif. */
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  font-size: 16px; font-weight: 400; line-height: 1.65;
+  padding: 12px 15px; border-radius: 4px;
+  white-space: normal; width: 340px; text-align: left;
+  /* display:none, not opacity:0. An absolutely positioned box stays in layout while merely
+     transparent, so this 340px tip -- centred on a word that can sit near the right edge --
+     made demo.html scroll sideways on a 390px phone even with nobody hovering. Taking it out
+     of layout costs the fade on appear and keeps the tip on every device, which hiding it at
+     a breakpoint would not. */
+  display: none; pointer-events: none; z-index: 10;
+}
+
+.s2 .has-tip .tip::after {
+  content: ''; position: absolute; bottom: 100%; left: 50%;
+  transform: translateX(-50%); border: 5px solid transparent;
+  border-bottom-color: var(--ink);
+}
+
+.s2 .has-tip:hover .tip { display: block; }
+
+.s2 .draws-summary-row {
+  display: flex; gap: 6px 10px; flex-wrap: wrap; align-items: center;
+  font-size: 15.5px; font-weight: 600;
+}
+
+.s2 .draws-summary-row .summary-item {
+  padding: 3px 6px; border-radius: 3px; white-space: nowrap; gap: 6px;
+  transition: background 120ms ease, opacity 120ms ease;
+}
+
+.s2 .draws-summary-row .summary-ball { width: 22px; height: 22px; border-width: 1px; }
+.s2 .summary-item.win { background: #fff8c2; box-shadow: 0 0 0 1px var(--accent); }
+.s2 .summary-item.dim { opacity: 0.45; }
+
+.s2 .option-box {
+  background: var(--card); border: 1px solid var(--hairline);
+  padding: 13px 20px 15px; text-align: left; cursor: pointer;
+  transition: border-color 120ms ease, background 120ms ease;
+  display: flex; flex-direction: column;
+}
+
+.s2 .option-box.option-1 { grid-column: 1; grid-row: 2; }
+.s2 .option-box.option-2 { grid-column: 2; grid-row: 2; }
+.s2 .option-box:hover { border-color: var(--accent); }
+
+.s2 .option-box.selected {
+  border-color: var(--accent); background: #b1bfd8;
+  box-shadow: inset 0 0 0 1px var(--accent);
+}
+
+.s2 .inline-option-label {
+  font-weight: 800; color: var(--accent);
+  text-transform: uppercase; letter-spacing: 0.06em;
+  font-size: 17.5px; margin-right: 6px;
+}
+
+.s2 .option-description {
+  font-size: 18.5px; line-height: 1.55; margin: 0 0 14px; flex-grow: 1;
+}
+
+.s2 .option-image {
+  width: 100%; max-width: 440px; height: 215px; object-fit: contain;
+  margin: 0 auto 12px; display: block;
+}
+
+.s2 .select-btn {
+  font-family: 'Inter', sans-serif; width: 100%;
+  padding: 10px 20px; font-size: 15.5px; font-weight: 700;
+  text-transform: uppercase; letter-spacing: 0.08em;
+  background: white; color: var(--accent);
+  border: 1.5px solid var(--accent); border-radius: 0;
+  cursor: pointer; box-shadow: none; flex: 0 0 auto;
+  transition: background 120ms ease, color 120ms ease;
+}
+
+.s2 .select-btn:hover { background: var(--accent-soft); }
+
+/* ---------- confirmation ---------- */
+.mp-modal-overlay {
+  display: none; position: fixed; inset: 0;
+  background: rgba(0, 0, 0, 0.5); z-index: 1000;
+  justify-content: center; align-items: center;
+  font-family: 'Inter', -apple-system, sans-serif;
+}
+
+.mp-modal-content {
+  background: white; padding: 28px 32px;
+  border: 1px solid var(--ink); border-radius: 2px;
+  max-width: 620px; text-align: left; margin: 20px;
+}
+
+.mp-modal-content h3 {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-weight: 600; font-size: 22px; margin: 0 0 14px;
+}
+
+.mp-modal-content p { margin: 0 0 14px; line-height: 1.6; font-size: 15.5px; }
+.mp-modal-content .choice-highlight { font-weight: 600; color: #33425a; }
+
+.mp-modal-buttons {
+  display: flex; justify-content: flex-end; gap: 14px;
+  margin-top: 18px; padding-top: 14px; border-top: 1px solid #d8d4cc;
+}
+
+.mp-modal-btn {
+  font-family: 'Inter', sans-serif; padding: 11px 28px;
+  font-size: 13.5px; font-weight: 600;
+  text-transform: uppercase; letter-spacing: 0.05em;
+  border-radius: 0; cursor: pointer; box-shadow: none; flex: 0 0 auto;
+}
+
+.mp-modal-btn.confirm { background: #33425a; color: white; border: 1px solid #33425a; }
+.mp-modal-btn.confirm:hover { background: #1f2c42; border-color: #1f2c42; }
+.mp-modal-btn.goback { background: white; color: #111111; border: 1px solid #111111; }
+.mp-modal-btn.goback:hover { background: #fafaf7; }
+
+/* Study 2 ran on lab and desktop screens only; a website has to fold. */
+@media (max-width: 1120px) {
+  .s2 .layout-2col { grid-template-columns: minmax(0, 528px); }
+  .s2 .draws-strip { grid-column: 1; grid-row: 1; }
+  .s2 .option-box.option-1 { grid-column: 1; grid-row: 2; }
+  .s2 .option-box.option-2 { grid-column: 1; grid-row: 3; margin-top: 18px; }
+  .s2 .section-header { white-space: normal; }
+}
+
+/* ---------- results, in the same idiom ---------- */
+.s2 .recall {
+  background: var(--cream); border: 1px solid var(--cream-border);
+  border-left: 4px solid var(--accent);
+  padding: 10px 20px; margin: 0 0 22px;
+  display: flex; align-items: center; gap: 18px; flex-wrap: wrap;
+}
+
+.s2 .recall-label {
+  font-size: 13px; font-weight: 700; color: var(--accent);
+  text-transform: uppercase; letter-spacing: 0.07em; white-space: nowrap;
+}
+
+.s2 .recall .draws-summary-row { flex: 1 1 auto; }
+
+.s2 .picker { margin: 4px 0 18px; }
+
+.s2 .pick-label {
+  font-size: 14px; font-weight: 700; color: var(--ink-soft);
+  text-transform: uppercase; letter-spacing: 0.07em; margin-bottom: 8px;
+}
+
+.s2 .predbox {
+  background: #fff; border: 1px solid var(--hairline);
+  padding: 20px 24px 16px; margin-bottom: 18px;
+}
+
+.s2 .pred-head {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: 19px; font-weight: 500; margin-bottom: 16px;
+}
+
+.s2 .pred-row {
+  display: grid; grid-template-columns: 12px 210px 1fr 62px;
+  align-items: center; gap: 12px;
+  padding: 9px 4px; border-bottom: 1px solid var(--hairline);
+}
+
+.s2 .pred-row:last-of-type { border-bottom: none; }
+.s2 .chip { width: 11px; height: 11px; border-radius: 2px; }
+
+.s2 .pred-name { font-size: 16.5px; font-weight: 600; }
+.s2 .pred-bar { background: #e4e0d8; height: 11px; }
+.s2 .pred-bar > div { background: var(--accent); height: 100%; }
+.s2 .pred-val { text-align: right; font-size: 18px; font-weight: 700; font-variant-numeric: tabular-nums; }
+
+.s2 .pred-foot {
+  margin-top: 14px; padding-top: 12px; border-top: 1px solid var(--hairline);
+  font-size: 13.5px; line-height: 1.6; color: var(--ink-soft);
+}
+
+@media (max-width: 620px) {
+  .s2 .pred-row { grid-template-columns: 12px 1fr 62px; }
+  .s2 .pred-bar { grid-column: 2 / -1; }
+}
+
+.s2 h2 {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-weight: 600; font-size: 24px; margin: 34px 0 14px;
+}
+
+.s2 .models { display: flex; gap: 9px; align-items: center; flex-wrap: wrap; margin: 6px 0 18px; }
+
+.s2 button.model {
+  font-family: 'Inter', sans-serif; flex: 0 0 auto;
+  padding: 10px 18px; font-size: 13px; font-weight: 600;
+  text-transform: uppercase; letter-spacing: 0.06em;
+  background: #fff; color: var(--accent);
+  border: 1.5px solid var(--accent); border-radius: 0;
+  cursor: pointer; box-shadow: none;
+}
+
+.s2 button.model:hover { background: var(--accent-soft); }
+.s2 button.model.on { background: var(--accent); color: #fff; }
+
+.s2 .scroll { overflow-x: auto; background: #fff; border: 1px solid var(--hairline); }
+.s2 table { border-collapse: collapse; width: 100%; font-size: 15.5px; }
+.s2 th, .s2 td { text-align: right; padding: 10px 16px; border-bottom: 1px solid var(--hairline); }
+.s2 th:first-child, .s2 td:first-child { text-align: left; }
+
+.s2 th {
+  font-weight: 700; color: var(--ink-soft); font-size: 12.5px;
+  text-transform: uppercase; letter-spacing: 0.06em;
+}
+
+.s2 tr:last-child td { border-bottom: none; }
+.s2 #plot { background: #fff; border: 1px solid var(--hairline); padding: 18px; }
+.s2 .small { font-size: 13.5px; }
+.s2 .muted { color: var(--ink-soft); }
+
+/* ---------- curve legend doubles as a highlight switch ---------- */
+.s2 .legend-row { display: flex; gap: 8px; flex-wrap: wrap; align-items: center; margin-top: 10px; }
+
+.s2 button.legend {
+  font-family: 'Inter', sans-serif; flex: 0 0 auto;
+  display: inline-flex; align-items: center; gap: 6px;
+  padding: 7px 12px; font-size: 14.5px; font-weight: 500;
+  background: #fff; color: var(--ink);
+  border: 1px solid var(--hairline); border-radius: 0;
+  cursor: pointer; box-shadow: none;
+}
+
+.s2 button.legend:hover { border-color: var(--accent); }
+.s2 button.legend.on { border-color: var(--accent); background: var(--accent-soft); font-weight: 700; }
+
+/* ---------- the question-pool disclosure ---------- */
+.s2 details.pool { margin: -6px 0 4px; }
+
+.s2 details.pool summary {
+  cursor: pointer; color: var(--accent);
+  font-size: 15px; font-weight: 600;
+  list-style: none; display: inline-flex; align-items: center; gap: 6px;
+}
+
+.s2 details.pool summary::-webkit-details-marker { display: none; }
+.s2 details.pool summary::before { content: "\25B8"; font-size: 0.8em; }
+.s2 details.pool[open] summary::before { content: "\25BE"; }
+
+.s2 details.pool.curve { margin-top: 18px; }
+
+.s2 details.pool.curve > summary {
+  font-size: 17px; font-weight: 700;
+  padding: 11px 16px;
+  border: 1px solid var(--accent); background: var(--accent-soft);
+  border-radius: 6px;
+}
+
+.s2 details.pool.curve > summary:hover { background: #dfe6f2; }
+.s2 details.pool.curve > div { padding: 18px 20px 20px; }
+
+.s2 .curve-intro { font-size: 16px; line-height: 1.65; color: var(--ink); margin: 0 0 4px; }
+
+.s2 details.pool > div {
+  margin-top: 10px; padding: 14px 18px;
+  background: #fff; border: 1px solid var(--hairline);
+  font-size: 16px; line-height: 1.65;
+}
+
+.s2 details.pool p { margin: 0 0 10px; }
+.s2 details.pool p:last-child { margin-bottom: 0; }
+
+.s2 details.pool.curve .models { margin: 12px 0 6px; }
+
+/* ---------- the question-pool popup ---------- */
+.s2 #poolLink { color: var(--accent); font-weight: 600; }
+.mp-modal-content #poolLists p { margin: 0 0 12px; line-height: 1.6; font-size: 15.5px; }
+.mp-modal-content #poolLists p:last-child { margin-bottom: 0; }
+
+/* ---------- the question screen fits a laptop without scrolling ----------
+   The two option boxes, their diagram and the padding above are all sized so
+   the whole question lands inside about 745px. The site footer is the last
+   148px, and it has no business sitting under a question someone is
+   answering, so it goes away for this one step and comes back afterwards. */
+body.playing footer { display: none; }
+body.playing .s2 { padding-top: 16px; padding-bottom: 20px; }

@@ -3,124 +3,214 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Demo &middot; Sijia Zhang</title>
+<meta name="description" content="A ten-question mini version of the adaptive elicitation behind Sijia Zhang's job market paper: answer a few questions and see what six ambiguity models predict about you.">
+<title>Try a Mini Experiment &middot; Sijia Zhang</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%20120%2052%22%3E%3Cpath%20fill%3D%22%2322262b%22%20d%3D%22M4%2012%20C18%208%2032%2014%2044%2022%20L48%208%20L53%2019%20C56%2013%2064%2013%2067%2019%20L72%208%20L76%2022%20C88%2014%20102%208%20116%2012%20C110%2025%20104%2031%2098%2028%20C96%2035%2091%2038%2087%2033%20C83%2040%2077%2042%2073%2036%20C69%2043%2065%2045%2060%2045%20C55%2045%2051%2043%2047%2036%20C43%2042%2037%2040%2033%2033%20C29%2038%2024%2035%2022%2028%20C16%2031%2010%2025%204%2012%20Z%22/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600;700&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="assets/style.css">
+<link rel="stylesheet" href="assets/demo_s2.css">
 </head>
 <body>
 
 <header>
   <nav>
-    <span class="me">Sijia Zhang</span>
-    <a href="index.html">About</a>
-    <a href="research.html">Research</a>
-    <a href="teaching.html">Teaching</a>
-    <a href="demo.html" class="on">Demo</a>
-    <a href="assets/CV.pdf">CV</a>
+    <a class="me" href="index.html">
+      <svg class="bat" viewBox="0 0 120 52" aria-hidden="true"><path d="M4 12 C18 8 32 14 44 22 L48 8 L53 19 C56 13 64 13 67 19 L72 8 L76 22 C88 14 102 8 116 12 C110 25 104 31 98 28 C96 35 91 38 87 33 C83 40 77 42 73 36 C69 43 65 45 60 45 C55 45 51 43 47 36 C43 42 37 40 33 33 C29 38 24 35 22 28 C16 31 10 25 4 12 Z"/></svg>Sijia Zhang</a>
+    <a class="tab" href="index.html">Home</a><a class="tab" href="research.html">Research</a><a class="tab" href="cv.html">CV</a><a class="tab on" href="demo.html">Try a Mini Experiment</a>
   </nav>
 </header>
 
-<main class="wrap">
+<main class="s2">
 
-  <h1>What do the models think of you?</h1>
-  <p class="sub">Answer a few bets. Then four theories of ambiguity predict a kind of bet you
-  were never asked about.</p>
-
-  <!-- ------------------------------------------------ intro -->
+  <!-- ------------------------------------------------ instructions -->
   <section id="intro">
-    <div class="card">
-      <p>There is a box of 100 balls, each green, blue, yellow or orange. You are not told how many
-      of each. Five balls were drawn, with replacement, and here is what came out:</p>
-      <div class="urn" id="urn"></div>
-      <p class="small muted">Your box and your draws are sampled fresh. Reload for a different one.</p>
-    </div>
+    <div class="page-container">
+      <h1 class="page-title">Try a Mini Experiment</h1>
 
-    <p>Now you will be offered a series of bets. Each time, you choose between betting on a colour
-    from that box &mdash; where you do not know the odds &mdash; and a bet that pays with a stated
-    chance, like a coin or a spinner.</p>
+      <div class="intro-info">
+        <p class="intro-label">What you&rsquo;ll see</p>
+        <p>An ambiguous box contains 100 balls. Each ball can be one of four colors, but you do
+          not know the actual color composition of the box. You will see five draws with
+          replacement from this box.</p>
 
-    <p>There are no right answers, and the questions are not fixed in advance. Each one is chosen by an
-    adaptive procedure that picks whichever question it expects to learn the most from, given
-    everything you have said so far. That is the method the research uses; this is a short version
-    of it.</p>
+        <p class="intro-label">What you&rsquo;ll do</p>
+        <p>You will make ten binary choices. In each question, one or more colors are
+          designated as winning colors, and you receive a hypothetical $5 prize if the ball drawn
+          from a box is one of those colors. You choose which box you want the ball drawn from: a
+          known box, where you know exactly how many balls are winning colors, or the ambiguous
+          box, where you only observe the five previous draws.</p>
 
-    <div class="choices">
-      <button id="start" class="plain" disabled>Loading&hellip;</button>
+        <p class="intro-label">How each question is chosen</p>
+        <p>The questions are selected adaptively using Dynamically Optimized Sequential
+          Experimentation (DOSE). Based on your previous answers, DOSE selects the next question
+          that is expected to be most informative about your ambiguity attitudes.</p>
+
+        <p class="intro-label">What happens after ten questions</p>
+        <p>Different ambiguity models will be fitted to your answers and used to predict choices you
+          were never asked about. You will answer only questions involving two or three
+          winning colors, while the models will predict your choices for single-color events.</p>
+
+        <p style="color:#555">The $5 prize is hypothetical: nothing is paid, nothing is stored, and
+          nothing you do here leaves your browser.</p>
+      </div>
+
+      <div class="next-row visible">
+        <button id="start" disabled>Loading&hellip;</button>
+      </div>
     </div>
   </section>
 
-  <!-- ------------------------------------------------ play -->
-  <section id="play" hidden>
-    <p class="small muted" id="qnum"></p>
-    <div class="bar"><div id="qbar" style="width:0%"></div></div>
-    <div class="card">
-      <p id="qtext"></p>
-      <div class="choices">
-        <button id="optA"></button>
-        <button id="optB"></button>
+  <!-- ------------------------------------------------ the draw -->
+  <section id="draw" hidden>
+    <div class="page-container">
+      <h1 class="page-title">Example Draws</h1>
+
+      <div class="intro-info">
+        <p>The ambiguous box contains 100 balls, each colored either
+          <span class="color-green">GREEN</span>, <span class="color-blue">BLUE</span>,
+          <span class="color-yellow">YELLOW</span>, or <span class="color-orange">ORANGE</span>.
+          The composition of the box is unknown to you.</p>
+        <p>Below, you will see five example draws from the box, one at a time. Each ball is
+          returned to the box before the next is drawn.
+          <strong>The summary of your example draws will appear on every following question for
+          your reference.</strong></p>
+      </div>
+
+      <div class="draws-card">
+        <div class="draws-label">Draws from the box:</div>
+        <div class="draws-balls" id="drawBalls"></div>
+
+        <div class="draws-summary" id="drawSummary">
+          <div class="summary-label">Summary of five draws</div>
+          <div class="summary-row" id="drawSummaryRow"></div>
+        </div>
+      </div>
+
+      <div class="status-text" id="drawStatus"></div>
+
+      <div class="next-row" id="drawNextRow">
+        <button id="toq">Continue</button>
       </div>
     </div>
-    <p class="small muted">Answer with your gut. The procedure adapts either way.</p>
+  </section>
+
+  <!-- ------------------------------------------------ questions -->
+  <section id="play" hidden>
+    <div class="section-row">
+      <div class="section-header" id="secHeader"></div>
+    </div>
+
+    <div class="layout-2col">
+      <div class="draws-strip">
+        <span class="draws-text" id="drawsText"></span>
+        <div class="draws-summary-row" id="sumRow"></div>
+      </div>
+
+      <div class="option-box option-1" id="option1Box">
+        <div class="option-description" id="opt1Desc"></div>
+        <img class="option-image" id="opt1Img" alt="">
+        <button type="button" class="select-btn" id="opt1Btn">Choose Option 1</button>
+      </div>
+
+      <div class="option-box option-2" id="option2Box">
+        <div class="option-description" id="opt2Desc"></div>
+        <img class="option-image" id="opt2Img" alt="">
+        <button type="button" class="select-btn" id="opt2Btn">Choose Option 2</button>
+      </div>
+    </div>
+
+    <div class="next-container">
+      <button type="button" id="nextBtn" disabled>Submit</button>
+    </div>
   </section>
 
   <!-- ------------------------------------------------ results -->
   <section id="results" hidden>
-    <h2>Bets you were never offered</h2>
-    <p>Each column is a different theory of how people bet when they do not know the odds, fitted
-    to your answers. The numbers are matching probabilities: the known chance at which that model
-    says you would be indifferent.</p>
+    <div class="page-container">
+      <h1 class="page-title">What the models say about you</h1>
 
-    <div class="card scroll">
-      <table>
-        <thead id="thead_out"></thead>
-        <tbody id="tbody_out"></tbody>
-      </table>
+      <div class="intro-info">
+        <p>Choose one of the bets below&mdash;none of which you were asked about&mdash;to see
+        what each model predicts you would choose.
+        <a href="#" id="poolLink">See which bets could be asked, and which were kept out.</a></p>
+      </div>
+
+      <div class="picker">
+        <div class="pick-label">Single-color bets &mdash; never asked, pure prediction</div>
+        <div class="models" id="pickOut"></div>
+      </div>
+
+      <div class="recall">
+        <span class="recall-label">Your five draws</span>
+        <div class="draws-summary-row" id="recallRow"></div>
+      </div>
+
+      <div class="predbox" id="predBox"></div>
+
+      <details class="pool curve">
+        <summary>See the fitted curve</summary>
+        <div>
+          <p class="curve-intro">The curve maps the <span class="has-tip">subjective
+            probability<span class="tip">Your belief about how likely the event is.</span></span> of
+            each event to its corresponding <span class="has-tip">matching probability<span
+            class="tip">The matching probability is the fraction of winning-color balls in the
+            known box that would make you indifferent between betting that a winning color is
+            drawn from the known box and from the ambiguous box.</span></span>. The dashed line represents
+            ambiguity neutrality, and deviations from it reflect the model's fitted ambiguity
+            attitude. Click a model name to highlight its curve.</p>
+          <div class="models" id="curveModels"></div>
+          <div id="plot"></div>
+        </div>
+      </details>
+
+      <h2>Want to know more?</h2>
+      <div class="intro-info">
+        <p>Everything above is a within-condition prediction: the models were fitted to
+          choices from one box and used to predict other choices involving that same box.</p>
+        <p>Cross-condition prediction is different. A model that performs best within a
+          condition is not guaranteed to perform best across conditions, because cross-condition
+          prediction also depends on how stable the model's estimated ambiguity-attitude
+          parameters remain when the situation changes.</p>
+        <p>This is exactly what my job market paper studies!
+          <a href="research.html">Read more here.</a></p>
+      </div>
+
+      <div class="next-row visible">
+        <button id="again">Play again</button>
+      </div>
     </div>
-
-    <p id="heldnote"></p>
-
-    <h2>And the ones you were</h2>
-    <p class="small muted">For comparison. You gave binary answers at a handful of offers; these
-    are the continuous matching probabilities each model reads off them.</p>
-
-    <div class="card scroll">
-      <table>
-        <thead id="thead_in"></thead>
-        <tbody id="tbody_in"></tbody>
-      </table>
-    </div>
-
-    <h2>The same thing as a curve</h2>
-    <p>Read it as: for an event of any given probability, what known chance would make you
-    indifferent? The dashed line is what someone indifferent to ambiguity would do. Distance from
-    it is your fitted ambiguity attitude.</p>
-    <div class="card" id="plot"></div>
-
-    <h2>And here is the open question</h2>
-    <p>Those models mostly agree with each other, because you gave them one box, and any of them
-    can be bent to fit one box. They stop agreeing when you change the box &mdash; when the odds
-    get sharper or vaguer than the ones you were measured on. Some of these models carry your
-    attitude across that change; at least one of them cannot see the change at all.</p>
-    <p>Which of them travels is an empirical question, and it is what my job market paper is
-    about. <a href="research.html">Read about it here.</a></p>
-
-    <div class="choices">
-      <button id="again" class="plain">Play again</button>
-    </div>
-
-    <p class="small muted" style="margin-top:26px">Method. Questions are chosen by maximising
-    expected information gain under a neo-additive model with a free belief; the models are then
-    re-fitted to the same answers on a finer grid, with belief restricted to a one-parameter
-    update (Aydogan 2021) except for the smooth model, which assumes Bayesian updating. The
-    single- and triple-colour bets are what the procedure may ask; the two-colour bets are held
-    out by construction, exactly as in the experiment this is drawn from. Nothing is stored and
-    nothing is sent anywhere &mdash; it all runs in your browser.</p>
   </section>
 
 </main>
 
-<footer class="wrap">
-  <a href="index.html">Sijia Zhang</a> &middot; teresasijia@tamu.edu
-</footer>
+<div class="mp-modal-overlay" id="poolModal">
+  <div class="mp-modal-content">
+    <h3>The question pool</h3>
+    <div id="poolLists"></div>
+    <div class="mp-modal-buttons">
+      <button type="button" class="mp-modal-btn confirm" id="poolClose">Close</button>
+    </div>
+  </div>
+</div>
+
+<div class="mp-modal-overlay" id="confirmModal">
+  <div class="mp-modal-content">
+    <h3>Please confirm</h3>
+    <p>You chose <span class="choice-highlight" id="confirmChoiceText"></span>.</p>
+    <p id="confirmDescription"></p>
+    <div class="mp-modal-buttons">
+      <button type="button" class="mp-modal-btn goback" id="goBackBtn">Go back</button>
+      <button type="button" class="mp-modal-btn confirm" id="confirmBtn">Confirm</button>
+    </div>
+  </div>
+</div>
+
+  <footer>
+    <span>Sijia Zhang &middot; <a href="mailto:teresasijia@tamu.edu">teresasijia@tamu.edu</a></span>
+    <span>Department of Economics, Texas A&amp;M University</span>
+  </footer>
 
 <script src="assets/demo.js"></script>
 </body>

@@ -156,6 +156,10 @@ a { color: var(--accent); }
 
 .badge.grey { border-color: var(--rule); color: var(--muted); }
 
+/* a badge that is a link: keep the pill, drop the underline */
+a.badge { text-decoration: none; }
+a.badge:hover { background: var(--accent); color: #fff; }
+
 /* revise-and-resubmit: filled badge, accent rail, same weight as the JMP card */
 .badge.rr {
   background: var(--accent);
